@@ -6,6 +6,16 @@ export const PostsRouter = createTRPCRouter({
     const posts = await ctx.prisma.post.findMany();
     return posts;
   }),
+
+  getPostById: publicProcedure
+    .input(z.string())
+    .query(async ({ input, ctx }) => {
+      const post = await ctx.prisma.post.findUnique({
+        where: { id: input },
+      });
+      return post;
+    }),
+
   createPost: publicProcedure
     .input(z.object({ title: z.string() }))
     .mutation(async ({ input, ctx }) => {
