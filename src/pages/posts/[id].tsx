@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import CommentForm from "./components/CommentForm";
+import Comments from "./components/Comments";
 
 const Post: NextPage = () => {
   const { query } = useRouter();
@@ -11,6 +12,7 @@ const Post: NextPage = () => {
     return (
       <div>
         <h3>{data.title}</h3>
+        <Comments comments={data.comments} />
         <CommentForm postId={data.id} />
       </div>
     );
