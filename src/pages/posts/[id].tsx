@@ -6,11 +6,13 @@ const Post: NextPage = () => {
   const { query } = useRouter();
   const { data } = api.posts.getPostById.useQuery(query.id as string);
 
-  return (
-    <div>
-      <h3>{data?.title}</h3>
-    </div>
-  );
+  if (data)
+    return (
+      <div>
+        <h3>{data.title}</h3>
+      </div>
+    );
+  else return <div>Not Found</div>;
 };
 
 export default Post;
