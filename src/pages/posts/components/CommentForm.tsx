@@ -21,10 +21,16 @@ const CommentForm = (props: Props) => {
     resolver: yupResolver(schema),
   });
 
+  const utils = api.useContext();
   const mutation = api.comments.createComment.useMutation();
 
   const onSubmit = (data: FormData) => {
-    mutation.mutate({ body: data.body, postId: props.postId });
+    mutation.mutate(
+      { body: data.body, postId: props.postId },
+      {
+        onSuccess: () => utils.posts.getPostById.invalidate(),
+      }
+    );
   };
 
   return (
