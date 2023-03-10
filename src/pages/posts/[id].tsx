@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
+import CommentForm from "./components/CommentForm";
 
 const Post: NextPage = () => {
   const { query } = useRouter();
@@ -10,6 +11,7 @@ const Post: NextPage = () => {
     return (
       <div>
         <h3>{data.title}</h3>
+        <CommentForm postId={data.id} />
       </div>
     );
   else return <div>Not Found</div>;
