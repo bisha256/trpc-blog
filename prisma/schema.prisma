@@ -66,6 +66,14 @@ model VerificationToken {
 }
 
 model Post {
-    id    String @id @default(cuid())
-    title String
+    id       String    @id @default(cuid())
+    title    String
+    comments Comment[]
+}
+
+model Comment {
+    id     String @id @default(cuid())
+    body   String
+    postId String
+    post   Post   @relation(fields: [postId], references: [id])
 }
